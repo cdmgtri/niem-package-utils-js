@@ -1,0 +1,20 @@
+{
+  "name": "niem-package-utils-js",
+  "version": "1.0.0",
+  "description": "Utility functions for NIEM packages.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "jszip": "^3.1.5",
+    "niem-model-api-specification": "github:cdmgtri/niem-model-api-specification",
+    "xml-js": "^1.6.8"
+  }
+}
