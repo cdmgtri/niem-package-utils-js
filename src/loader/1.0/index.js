@@ -13,6 +13,12 @@ let docs = require("../../../node_modules/niem-model-schema/jsdocs/index");
  */
 class NIEMPackageLoader_1_0 extends NIEMPackageLoader {
 
+  /**
+   * Extracts fields from the IEPD metadata.xml file and returns them as a
+   * NIEM model object.
+   *
+   * @returns {NIEMModel}
+   */
   async extractMetadata() {
     let metadataFile = this.zip.file(/metadata.xml$/)[0];
 
