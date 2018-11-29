@@ -1,6 +1,8 @@
 
 const JSZip = require("jszip");
 
+let { NIEMModel } = require("niem-model-schema");
+
 class NIEMPackageLoader {
 
   /**
