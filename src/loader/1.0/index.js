@@ -3,7 +3,7 @@ let convert = require("xml-js");
 
 let NIEMPackageLoader = require("../index");
 
-let docs = require("../../../node_modules/niem-model-schema/jsdocs/index");
+let { NIEMModel } = require("niem-model-schema");
 
 
 /**
