@@ -5,8 +5,11 @@ let NIEMPackageLoader = require("../index");
 
 let docs = require("../../../node_modules/niem-model-api-specification/jsdocs/index");
 
+
 /**
  * Specialized utilities based on version 1.0 of the MPD specification.
+ *
+ * @todo Test IEPD might be pre MPD 1.0 specification.  Find out label.
  */
 class NIEMPackageLoader_1_0 extends NIEMPackageLoader {
 
@@ -30,6 +33,7 @@ function loadMetadataObject(xmlString) {
   /** @type {NIEMModel} */
   let model = {};
 
+  // Convert the XML metadata file string into a JSON object for processing.
   let json = convert.xml2js(xmlString, {compact: true});
 
   if (!json || !json.Metadata) {
@@ -39,6 +43,7 @@ function loadMetadataObject(xmlString) {
 
   let metadata = json.Metadata;
 
+  // Load model-related fields from metadata.
   model.name = metadata.Name._text;
   model.summary = metadata.Summary._text;
   model.description = metadata.Description._text;
@@ -46,11 +51,10 @@ function loadMetadataObject(xmlString) {
   model.source = getSource(metadata.AuthoritativeSource.Organization);
   model.contactInfo = getContactInfo(metadata.AuthoritativeSource.PointOfContact);
   model.website = metadata.URL._text;
-
   model.packages = [{}];
 
+  // Load package-related fields from metadata.
   let pkg = model.packages[0];
-
   pkg.version = metadata.Version._text;
   pkg.baseNIEM = metadata.NIEMVersion._text;
   pkg.modelName = model.name;
@@ -60,6 +64,9 @@ function loadMetadataObject(xmlString) {
   return model;
 }
 
+/**
+ * Compresses the metadata complex authoritative source info into a single multi-line string.
+ */
 function getSource(json) {
   let str = "";
   str += appendField(json.Name);
@@ -73,6 +80,9 @@ function getSource(json) {
   return str;
 }
 
+/**
+ * Compresses the metadata complex contact information into a single multi-line string.
+ */
 function getContactInfo(json) {
   let str = "";
   str += appendField(json.Name);
@@ -88,6 +98,9 @@ function getContactInfo(json) {
   return str;
 }
 
+/**
+ * Returns the text value from the XML-as-JSON object, followed by a space or a newline.
+ */
 function appendField(json, newLine=true) {
   if (json._text) {
     return json._text + (newLine ? "\n" : " ");

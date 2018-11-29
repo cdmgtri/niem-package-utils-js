@@ -2,7 +2,7 @@
 let fs = require("fs");
 let path = require("path");
 
-let NIEMPackageLoader = require("../src/loader/1.0/index");
+let { NIEMPackageLoader } = require("../index");
 
 jest.setTimeout(30000);
 
