@@ -3,7 +3,7 @@ let convert = require("xml-js");
 
 let NIEMPackageLoader = require("../index");
 
-let docs = require("../../../node_modules/niem-model-api-specification/jsdocs/index");
+let docs = require("../../../node_modules/niem-model-schema/jsdocs/index");
 
 
 /**
@@ -51,15 +51,15 @@ function loadMetadataObject(xmlString) {
   model.source = getSource(metadata.AuthoritativeSource.Organization);
   model.contactInfo = getContactInfo(metadata.AuthoritativeSource.PointOfContact);
   model.website = metadata.URL._text;
-  model.packages = [{}];
+  model.versions = [{}];
 
-  // Load package-related fields from metadata.
-  let pkg = model.packages[0];
-  pkg.version = metadata.Version._text;
-  pkg.baseNIEM = metadata.NIEMVersion._text;
-  pkg.modelName = model.name;
-  pkg.uri = metadata.URI._text;
-  pkg.more = metadata;
+  // Load version-related fields from metadata.
+  let version = model.versions[0];
+  version.version = metadata.Version._text;
+  version.baseNIEM = metadata.NIEMVersion._text;
+  version.modelName = model.name;
+  version.uri = metadata.URI._text;
+  version.more = metadata;
 
   return model;
 }

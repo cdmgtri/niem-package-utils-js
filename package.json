@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "jszip": "^3.1.5",
-    "niem-model-api-specification": "github:cdmgtri/niem-model-api-specification",
+    "niem-model-schema": "github:cdmgtri/niem-model-schema",
     "xml-js": "^1.6.8"
   }
 }
