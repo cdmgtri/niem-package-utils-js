@@ -65,7 +65,10 @@ function loadMetadataObject(xmlString) {
   version.baseNIEM = metadata.NIEMVersion._text;
   version.modelName = model.name;
   version.uri = metadata.URI._text;
-  version.more = metadata;
+
+  delete metadata.AuthoritativeSource;
+
+  version.more = getMore(metadata);
 
   return model;
 }
@@ -109,9 +112,29 @@ function getContactInfo(json) {
  */
 function appendField(json, newLine=true) {
   if (json._text) {
-    return json._text + (newLine ? "\n" : " ");
+    return json._text + (newLine ? " \n " : " ");
   }
   return "";
+}
+
+/**
+ * Converts the given XML->JSON representation from
+
+ * "key": {
+ *   _text: "value"
+ * }
+
+ * to "key": "value".
+ */
+function getMore(json) {
+
+  let convertedJSON = {};
+
+  for (let key in json) {
+    convertedJSON[key] = json[key]._text;
+  }
+
+  return convertedJSON;
 }
 
 module.exports = NIEMPackageLoader_1_0;
