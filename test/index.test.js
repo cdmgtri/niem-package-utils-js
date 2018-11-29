@@ -11,11 +11,9 @@ let filePath = path.join(__dirname,
 let zipBinary = fs.readFileSync(filePath);
 
 test("metadata", async () => {
-  let pkg = new NIEMPackageLoader(zipBinary);
-  await pkg.load();
+  let pkg = await new NIEMPackageLoader(zipBinary);
+  let model = await pkg.extractMetadata();
 
-  let metadata = await pkg.extractMetadata();
-
-  expect(metadata.name).toEqual("Individualized Education Program (IEP)");
-  expect(metadata.packages[0].modelName).toEqual("Individualized Education Program (IEP)");
+  expect(model.name).toEqual("Individualized Education Program (IEP)");
+  expect(model.versions[0].modelName).toEqual("Individualized Education Program (IEP)");
 });

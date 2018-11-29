@@ -4,22 +4,23 @@ const JSZip = require("jszip");
 class NIEMPackageLoader {
 
   /**
+   * Async constructor that loads the given zip file blob into a JSZip object.
+   *
    * @param {Blob} zipFile
    */
   constructor(zipFile) {
-    this.input = zipFile;
 
-    /** @type {JSZip} */
-    this.zip;
-  }
+    return ( async () => {
+      this.zip = await JSZip.loadAsync(zipFile);
+      return this;
+    })();
 
-  async load() {
-    this.zip = await JSZip.loadAsync(this.input);
   }
 
   /**
    * Extracts package metadata into a NIEM model object.
    * @abstract
+   * @returns {NIEMModel}
    */
   async extractMetadata() {
   }
